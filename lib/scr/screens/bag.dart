@@ -60,6 +60,49 @@ class _ShoppingBagState extends State<ShoppingBag> {
         ],
       ),
       backgroundColor: white,
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Container(
+              height: 120,
+              decoration: BoxDecoration(
+                color: white,
+                boxShadow: [
+                  BoxShadow(
+                    color: red.withOpacity(0.2),
+                    offset: Offset(3, 2),
+                    blurRadius: 30
+                  )
+                ]
+              ),
+              child: Row(
+                children: <Widget>[
+                  Image.asset("images/${product.image}",
+                  height: 120,
+                  width: 120,),
+
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        RichText(text: TextSpan(
+                          children: [
+                            TextSpan(text: product.name + "\n", style: TextStyle(color: black, fontSize: 20, fontWeight: FontWeight.bold)),
+                            TextSpan(text:"\$" + product.price.toString() + "", style: TextStyle(color: black, fontSize: 18, fontWeight: FontWeight.w300)),
+                          ]
+                        ),),
+
+                        IconButton(icon: Icon(Icons.delete), onPressed: null)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
