@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/helpers/style.dart';
+import 'package:food_course/scr/screens/bag.dart';
 import 'package:food_course/scr/widgets/bottom_navigation_icons.dart';
 import 'package:food_course/scr/widgets/categories.dart';
 import 'package:food_course/scr/widgets/custom_text.dart';
@@ -201,7 +203,7 @@ class _HomeState extends State<Home> {
                           padding: const EdgeInsets.all(8.0),
                           child: RichText(text: TextSpan(
                               children: [
-                                TextSpan(text: "\₵25.00 \n",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                                TextSpan(text: "\$25.00 \n",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
 
                               ], style: TextStyle(color: white)
                           ),),
@@ -233,8 +235,11 @@ class _HomeState extends State<Home> {
             ),
 
             BottomNavIcon(
+              onTap: (){
+                changeScreen(context, ShoppingBag());
+              },
               image: "shopping-bag.png",
-              name: "Card",
+              name: "Cart",
             ),
 
           BottomNavIcon(

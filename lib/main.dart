@@ -1,6 +1,7 @@
 import  'package:flutter/material.dart';
 import 'package:food_course/scr/screens/bag.dart';
 import 'package:food_course/scr/screens/home.dart';
+import 'package:food_course/scr/screens/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        home: Home()
+        home: LoginScreen()
     );
   }
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "752818674694",
+    "firebase_url": "https://foodapp-ee4f1.firebaseio.com",
+    "project_id": "foodapp-ee4f1",
+    "storage_bucket": "foodapp-ee4f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752818674694:android:112f5ce725096ae00bf787",
+        "android_client_info": {
+          "package_name": "com.dezeleven.food_course"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752818674694-bhfd4m2ck3vfabqj08r0uholac3bpspj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm1hjOoZc8dJc8lIhXLzZalQLx4IWJJTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752818674694-bhfd4m2ck3vfabqj08r0uholac3bpspj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
