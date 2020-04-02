@@ -27,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 Image.asset("images/lg.png", width: 240, height: 240,),
               ],
             ),
-            
            Padding(
              padding: const EdgeInsets.all(12),
              child: Container(
@@ -63,7 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(10),
               child: Container(
@@ -93,10 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-
-
-
-
           ],
         ),
       ),
