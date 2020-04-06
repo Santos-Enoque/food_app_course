@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/helpers/style.dart';
+import 'package:food_course/scr/providers/auth.dart';
 import 'package:food_course/scr/screens/bag.dart';
 import 'package:food_course/scr/widgets/bottom_navigation_icons.dart';
 import 'package:food_course/scr/widgets/categories.dart';
 import 'package:food_course/scr/widgets/custom_text.dart';
 import 'package:food_course/scr/widgets/featured_products.dart';
 import 'package:food_course/scr/widgets/small_floating_button.dart';
+import 'package:provider/provider.dart';
 
 
 class Home extends StatefulWidget {
@@ -19,6 +21,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: white,
       body: SafeArea(
@@ -243,6 +246,9 @@ class _HomeState extends State<Home> {
             ),
 
           BottomNavIcon(
+            onTap: ()async{
+              authProvider.signOut();
+            },
             image: "avatar.png",
             name: "Account",
           ),
