@@ -32,11 +32,13 @@ class Featured extends StatelessWidget {
                   child: Container(
                     height: 220,
                     width: 200,
-                    decoration: BoxDecoration(color: white, boxShadow: [
+                    decoration: BoxDecoration(color: white, 
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
                       BoxShadow(
-                          color: Colors.red[50],
-                          offset: Offset(15, 5),
-                          blurRadius: 30),
+                          color: Colors.grey[300],
+                          offset: Offset(-2, -1),
+                          blurRadius: 5),
                     ]),
                     child: Column(
                       children: <Widget>[
