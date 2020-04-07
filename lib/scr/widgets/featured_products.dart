@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/models/products.dart';
@@ -8,9 +9,9 @@ import '../helpers/style.dart';
 import 'custom_text.dart';
 
 List<Product> productsList = [
-  Product(name: "Pizza",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: false,image: "5.jpg"),
-  Product(name: "Fried rice",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: true,image: "1.jpg"),
-  Product(name: "Jollof rice",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: true,image: "1.jpg"),
+  Product(name: "Pizza",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: false,image: "food.jpg"),
+  Product(name: "Fried rice",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: true,image: "food.jpg"),
+  Product(name: "Jollof rice",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: true,image: "food.jpg"),
 
 ];
 
@@ -42,10 +43,12 @@ class Featured extends StatelessWidget {
                     ]),
                     child: Column(
                       children: <Widget>[
-                        Image.asset(
-                          "images/${productsList[index].image}",
-                          height: 140,
-                          width: 140,
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                          child: Image.asset(
+                            "images/${productsList[index].image}",
+                            height: 126,
+                          ),
                         ),
                         Row(
                           mainAxisAlignment:
