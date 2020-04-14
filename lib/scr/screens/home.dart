@@ -111,7 +111,6 @@ class _HomeState extends State<Home> {
               title: CustomText(text: "Settings"),
             ),
 
-
           ],
         ),
       ),
