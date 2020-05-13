@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/helpers/style.dart';
-import 'package:food_course/scr/providers/auth.dart';
+import 'package:food_course/scr/providers/user.dart';
 import 'package:food_course/scr/screens/home.dart';
 import 'package:food_course/scr/screens/registration.dart';
 import 'package:food_course/scr/widgets/custom_text.dart';
@@ -18,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
       key: _key,

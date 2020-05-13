@@ -7,7 +7,7 @@ import 'package:food_course/scr/widgets/custom_text.dart';
 import '../helpers/style.dart';
 
 class Details extends StatefulWidget {
-   final Product product;
+   final ProductModel product;
 
   const Details({@required this.product});
 

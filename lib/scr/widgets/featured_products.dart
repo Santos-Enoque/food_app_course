@@ -8,11 +8,7 @@ import 'package:food_course/scr/screens/details.dart';
 import '../helpers/style.dart';
 import 'custom_text.dart';
 
-List<Product> productsList = [
-  Product(name: "Pizza",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: false,image: "food.jpg"),
-  Product(name: "Fried rice",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: true,image: "food.jpg"),
-  Product(name: "Jollof rice",price: 20.0,rating: 4.3,vendor: "Papa's Pizza",wishList: true,image: "food.jpg"),
-
+List<ProductModel> productsList = [
 ];
 
 class Featured extends StatelessWidget {
@@ -75,11 +71,7 @@ class Featured extends StatelessWidget {
                                     ]),
                                 child: Padding(
                                   padding: const EdgeInsets.all(4.0),
-                                  child: productsList[index].wishList ? Icon(
-                                    Icons.favorite,
-                                    color: red,
-                                    size: 18,
-                                  ) : Icon(
+                                  child: Icon(
                                     Icons.favorite_border,
                                     color: red,
                                     size: 18,

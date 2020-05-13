@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/helpers/style.dart';
-import 'package:food_course/scr/providers/auth.dart';
+import 'package:food_course/scr/providers/user.dart';
 import 'package:food_course/scr/screens/login.dart';
 import 'package:food_course/scr/widgets/custom_text.dart';
 import 'package:food_course/scr/widgets/loading.dart';
@@ -19,7 +19,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
       key: _key,
