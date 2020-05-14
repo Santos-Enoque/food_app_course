@@ -8,18 +8,21 @@ class ProductModel {
   static const PRICE = "price";
   static const RESTAURANT_ID = "restaurantId";
   static const RESTAURANT = "restaurant";
+  static const DESCRIPTION = "description";
   static const CATEGORY = "category";
   static const FEATURED = "featured";
   static const RATES = "rates";
 
   String _id;
   String _name;
-  String _restaurantId;
+  int _restaurantId;
   String _restaurant;
   String _category;
   String _image;
+  String _description;
+
   double _rating;
-  double _price;
+  int _price;
   int _rates;
 
   bool _featured;
@@ -30,15 +33,17 @@ class ProductModel {
 
   String get restaurant => _restaurant;
 
-  String get restaurantId => _restaurantId;
+  int get restaurantId => _restaurantId;
 
   String get category => _category;
+
+  String get description => _description;
 
   String get image => _image;
 
   double get rating => _rating;
 
-  double get price => _price;
+  int get price => _price;
 
   bool get featured => _featured;
 
@@ -50,12 +55,13 @@ class ProductModel {
     _image = snapshot.data[IMAGE];
     _restaurant = snapshot.data[RESTAURANT];
     _restaurantId = snapshot.data[RESTAURANT_ID];
+    _description = snapshot.data[DESCRIPTION];
     _id = snapshot.data[ID];
     _featured = snapshot.data[FEATURED];
     _price = snapshot.data[PRICE];
     _category = snapshot.data[CATEGORY];
     _rating = snapshot.data[RATING];
     _rates = snapshot.data[RATES];
-
+    _name = snapshot.data[NAME];
   }
 }

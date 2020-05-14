@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/helpers/style.dart';
 import 'package:food_course/scr/providers/category.dart';
+import 'package:food_course/scr/providers/product.dart';
 import 'package:food_course/scr/providers/restaurant.dart';
 import 'package:food_course/scr/providers/user.dart';
+import 'package:food_course/scr/screens/category.dart';
+import 'package:food_course/scr/screens/restaurant.dart';
 import 'package:food_course/scr/widgets/categories.dart';
 import 'package:food_course/scr/widgets/custom_text.dart';
 import 'package:food_course/scr/widgets/featured_products.dart';
@@ -23,6 +27,7 @@ class _HomeState extends State<Home> {
     final user = Provider.of<UserProvider>(context);
     final categoryProvider = Provider.of<CategoryProvider>(context);
     final restaurantProvider = Provider.of<RestaurantProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -169,8 +174,14 @@ class _HomeState extends State<Home> {
                   scrollDirection: Axis.horizontal,
                   itemCount: categoryProvider.categories.length,
                   itemBuilder: (context, index) {
-                    return CategoryWidget(
-                      category: categoryProvider.categories[index],
+                    return GestureDetector(
+                      onTap: ()async{
+                        await productProvider.loadProductsByCategory(categoryName: categoryProvider.categories[index].name);
+                        changeScreen(context, CategoryScreen(categoryModel: categoryProvider.categories[index],));
+                      },
+                      child: CategoryWidget(
+                        category: categoryProvider.categories[index],
+                      ),
                     );
                   }),
             ),
@@ -197,7 +208,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-//            Featured(),
+            Featured(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -220,7 +231,11 @@ class _HomeState extends State<Home> {
             Column(
               children: restaurantProvider.restaurants
                   .map((item) => GestureDetector(
-                        onTap: () {},
+                        onTap: () async{
+                          await productProvider.loadProductsByRestaurant(restaurantId: item.id);
+
+                          changeScreen(context, RestaurantScreen(restaurantModel: item,));
+                        },
                         child: RestaurantWidget(
                           restaurant: item,
                         ),

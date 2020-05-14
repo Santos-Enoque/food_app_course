@@ -2,6 +2,8 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:food_course/scr/models/products.dart';
 import 'package:food_course/scr/widgets/custom_text.dart';
+import 'package:food_course/scr/widgets/loading.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 
 import '../helpers/style.dart';
@@ -17,132 +19,80 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  int quantity = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: black),
+        backgroundColor: white,
+        elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {},
+          ),
+
+        ],
+        leading: IconButton(icon: Icon(Icons.close), onPressed: (){Navigator.pop(context);}),
+      ),
       backgroundColor: white,
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              //width: MediaQuery.of(context).size.width,
-              height: 300,
-              child: Stack(
-                children: <Widget>[
-                  Carousel(
-                    images: [
-                      AssetImage('images/${widget.product.image}'),
-                      AssetImage('images/${widget.product.image}'),
-                      AssetImage('images/${widget.product.image}')
-                    ],
-                    dotBgColor: white,
-                    dotColor: grey,
-                    dotIncreasedColor: red,
-                    dotIncreaseSize: 1.2 ,
-                    autoplay: false,
-                  ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.arrow_back_ios,color: black ,),
-                        onPressed: () {Navigator.pop(context);},
-                      ),
-
-
-                      Padding(
-                        padding: const EdgeInsets.only(right:8.0),
-                        child: Stack(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Stack(
-                                children: <Widget>[
-                                  Image.asset("images/shopping-bag.png",width: 30,height: 30,),
-
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              right: 5,
-                              bottom: 0,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: white ,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color:  grey,
-                                          offset:  Offset(2,1),
-                                          blurRadius: 3,
-                                        )
-                                      ]
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 4.0, right:  4.0 ),
-                                    child: CustomText(text: "2",color: red,size: 18 ,weight: FontWeight.bold,),
-                                  )),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    right: 20,
-                    bottom: 55,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey[400],
-                            offset: Offset(2,1 ),
-                            blurRadius: 3,
-                          )
-                        ]
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6),
-                        child:  Icon(Icons.favorite,size: 22,color: red),
-                      ),
-
-                    ),
-
-                  )
-                ],
-              ),
+            CircleAvatar(
+              radius: 120,
+              backgroundImage: NetworkImage(widget.product.image),
             ),
-            CustomText(text: widget.product.name,size: 26,weight: FontWeight.bold),
-            CustomText(text: "\₵" + widget.product.price.toString(),size: 20,weight: FontWeight.w400),
+            SizedBox(height: 15,),
 
+            CustomText(text: widget.product.name,size: 26,weight: FontWeight.bold),
+            CustomText(text: "\$${widget.product.price / 100}",size: 20,weight: FontWeight.w400),
+            SizedBox(height: 10,),
+
+            CustomText(text: "Description",size: 18,weight: FontWeight.w400),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(widget.product.description , textAlign: TextAlign.center, style: TextStyle(color: grey, fontWeight: FontWeight.w300),),
+            ),
             SizedBox(height: 15,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: IconButton(icon: Icon(Icons.remove,size: 36,), onPressed: (){}),
+                  child: IconButton(icon: Icon(Icons.remove,size: 36,), onPressed: (){
+                    if(quantity != 1){
+                      setState(() {
+                        quantity -= 1;
+                      });
+                    }
+                  }),
                 ),
 
                 GestureDetector(
                   onTap: (){},
                   child: Container(
                     decoration: BoxDecoration(
-                      color: red,
+                      color: primary,
+                      borderRadius: BorderRadius.circular(20)
                     ),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(28,12,28,12),
-                      child: CustomText(text: "Add to Bag",color: white,size: 24,weight: FontWeight.w600,),
+                      child: CustomText(text: "Add $quantity To Cart",color: white,size: 22,weight: FontWeight.w300,),
                     ),
 
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: IconButton(icon: Icon(Icons.add,size: 36,color: red,), onPressed: (){}),
+                  child: IconButton(icon: Icon(Icons.add,size: 36,color: red,), onPressed: (){
+                    setState(() {
+                      quantity += 1;
+                    });
+                  }),
                 ),
               ],
             ),
