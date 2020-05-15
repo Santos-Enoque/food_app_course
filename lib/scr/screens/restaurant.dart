@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/helpers/style.dart';
 import 'package:food_course/scr/models/category.dart';
 import 'package:food_course/scr/models/restaurant.dart';
@@ -9,6 +10,8 @@ import 'package:food_course/scr/widgets/product.dart';
 import 'package:food_course/scr/widgets/small_floating_button.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import 'details.dart';
 
 class RestaurantScreen extends StatelessWidget {
   final RestaurantModel restaurantModel;
@@ -172,9 +175,11 @@ class RestaurantScreen extends StatelessWidget {
                 children: productProvider.productsByRestaurant
                     .map((item) => GestureDetector(
                   onTap: () {
-//                changeScreen(context, RestaurantScreen(restaurantModel: item,));
+                    changeScreen(context, Details(product: item,));
                   },
-                  child: ProductWidget(),
+                  child: ProductWidget(
+                    product: item,
+                  ),
                 ))
                     .toList(),
               )

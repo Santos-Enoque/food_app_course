@@ -13,4 +13,26 @@ class RestaurantServices {
         }
         return restaurants;
       });
+
+  Future<RestaurantModel> getRestaurantById({int id}) => _firestore.collection(collection).document(id.toString()).get().then((doc){
+    return RestaurantModel.fromSnapshot(doc);
+  });
+
+  Future<List<RestaurantModel>> searchRestaurant({String restaurantName}) {
+    // code to convert the first character to uppercase
+    String searchKey = restaurantName[0].toUpperCase() + restaurantName.substring(1);
+    return _firestore
+        .collection(collection)
+        .orderBy("name")
+        .startAt([searchKey])
+        .endAt([searchKey + '\uf8ff'])
+        .getDocuments()
+        .then((result) {
+      List<RestaurantModel> restaurants = [];
+      for (DocumentSnapshot product in result.documents) {
+        restaurants.add(RestaurantModel.fromSnapshot(product));
+      }
+      return restaurants;
+    });
+  }
 }
