@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
     final categoryProvider = Provider.of<CategoryProvider>(context);
     final restaurantProvider = Provider.of<RestaurantProvider>(context);
     final productProvider = Provider.of<ProductProvider>(context);
-
+    restaurantProvider.loadSingleRestaurant();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: white),
@@ -243,11 +243,6 @@ class _HomeState extends State<Home> {
                           size: 20,
                           color: grey,
                         ),
-                        CustomText(
-                          text: "see all",
-                          size: 14,
-                          color: primary,
-                        ),
                       ],
                     ),
                   ),
@@ -261,11 +256,6 @@ class _HomeState extends State<Home> {
                           text: "Popular restaurants",
                           size: 20,
                           color: grey,
-                        ),
-                        CustomText(
-                          text: "see all",
-                          size: 14,
-                          color: primary,
                         ),
                       ],
                     ),

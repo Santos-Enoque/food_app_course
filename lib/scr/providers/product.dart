@@ -12,10 +12,10 @@ class ProductProvider with ChangeNotifier{
 
 
   ProductProvider.initialize(){
-    _loadProducts();
+    loadProducts();
   }
 
-  _loadProducts()async{
+  loadProducts()async{
     products = await _productServices.getProducts();
     notifyListeners();
   }

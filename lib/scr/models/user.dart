@@ -34,10 +34,13 @@ class UserModel{
     _id = snapshot.data[ID];
     _stripeId = snapshot.data[STRIPE_ID];
     cart = snapshot.data[CART] ?? [];
-    totalCartPrice = getTotalPrice(cart: snapshot.data[CART]);
+    totalCartPrice = snapshot.data[CART] == null ? 0 :getTotalPrice(cart: snapshot.data[CART]);
   }
 
   int getTotalPrice({List cart}){
+    if(cart == null){
+      return 0;
+    }
     for(Map cartItem in cart){
       _priceSum += cartItem["price"] * cartItem["quantity"];
     }

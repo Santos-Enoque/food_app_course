@@ -7,10 +7,10 @@ class CategoryProvider with ChangeNotifier{
   List<CategoryModel> categories = [];
 
   CategoryProvider.initialize(){
-    _loadCategories();
+    loadCategories();
   }
 
-  _loadCategories()async{
+  loadCategories()async{
     categories = await _categoryServices.getCategories();
     notifyListeners();
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_course/scr/helpers/screen_navigation.dart';
 import 'package:food_course/scr/helpers/style.dart';
+import 'package:food_course/scr/providers/category.dart';
+import 'package:food_course/scr/providers/product.dart';
+import 'package:food_course/scr/providers/restaurant.dart';
 import 'package:food_course/scr/providers/user.dart';
 import 'package:food_course/scr/screens/home.dart';
 import 'package:food_course/scr/screens/registration.dart';
@@ -19,6 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<UserProvider>(context);
+    final categoryProvider = Provider.of<CategoryProvider>(context);
+    final restaurantProvider = Provider.of<RestaurantProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
 
     return Scaffold(
       key: _key,
@@ -27,14 +33,18 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 20,
+              height: 100,
             ),
-            
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset("images/lg.png", width: 240, height: 240,),
+                Image.asset("images/logo.png", width: 120, height: 120,),
               ],
+            ),
+
+            SizedBox(
+              height: 40,
             ),
            Padding(
              padding: const EdgeInsets.all(12),
@@ -83,6 +93,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                     return;
                   }
+                  categoryProvider.loadCategories();
+                  restaurantProvider.loadSingleRestaurant();
+                  productProvider.loadProducts();
                   authProvider.clearController();
                   changeScreenReplacement(context, Home());
                 },
