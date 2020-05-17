@@ -13,15 +13,6 @@ class SmallButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        decoration: BoxDecoration(
-          color: red,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child:  Icon(icon,size: 16,color: white),
-        ),
-
       ),
     );
   }

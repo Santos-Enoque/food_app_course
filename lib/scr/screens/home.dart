@@ -8,7 +8,10 @@ import 'package:food_course/scr/providers/category.dart';
 import 'package:food_course/scr/providers/product.dart';
 import 'package:food_course/scr/providers/restaurant.dart';
 import 'package:food_course/scr/providers/user.dart';
+import 'package:food_course/scr/screens/cart.dart';
 import 'package:food_course/scr/screens/category.dart';
+import 'package:food_course/scr/screens/login.dart';
+import 'package:food_course/scr/screens/order.dart';
 import 'package:food_course/scr/screens/product_search.dart';
 import 'package:food_course/scr/screens/restaurant.dart';
 import 'package:food_course/scr/screens/restaurants_search.dart';
@@ -47,35 +50,9 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.shopping_cart),
-                onPressed: () {},
-              ),
-              Positioned(
-                top: 12,
-                right: 12,
-                child: Container(
-                  height: 10,
-                  width: 10,
-                  decoration: BoxDecoration(
-                      color: green, borderRadius: BorderRadius.circular(20.0)),
-                ),
-              ),
-            ],
-          ),
-          Stack(
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.notifications),
-                onPressed: () {},
-              ),
-              Positioned(
-                top: 12,
-                right: 12,
-                child: Container(
-                  height: 10,
-                  width: 10,
-                  decoration: BoxDecoration(
-                      color: green, borderRadius: BorderRadius.circular(20.0)),
-                ),
+                onPressed: () {
+                  changeScreen(context, CartScreen());
+                },
               ),
             ],
           ),
@@ -87,13 +64,13 @@ class _HomeState extends State<Home> {
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: primary),
               accountName: CustomText(
-                text: user.userModel?.name,
+                text: user.userModel?.name ?? "username lading...",
                 color: white,
                 weight: FontWeight.bold,
                 size: 18,
               ),
               accountEmail: CustomText(
-                text: user.userModel?.email,
+                text: user.userModel?.email ?? "email loading...",
                 color: white,
               ),
             ),
@@ -102,30 +79,38 @@ class _HomeState extends State<Home> {
               leading: Icon(Icons.home),
               title: CustomText(text: "Home"),
             ),
+//            ListTile(
+//              onTap: () {},
+//              leading: Icon(Icons.fastfood),
+//              title: CustomText(text: "Food I like"),
+//            ),
+//            ListTile(
+//              onTap: () {},
+//              leading: Icon(Icons.restaurant),
+//              title: CustomText(text: "Liked restaurants"),
+//            ),
             ListTile(
-              onTap: () {},
-              leading: Icon(Icons.fastfood),
-              title: CustomText(text: "Food I like"),
-            ),
-            ListTile(
-              onTap: () {},
-              leading: Icon(Icons.restaurant),
-              title: CustomText(text: "Liked restaurants"),
-            ),
-            ListTile(
-              onTap: () {},
+              onTap: () async{
+                await user.getOrders();
+                changeScreen(context, OrdersScreen());
+              },
               leading: Icon(Icons.bookmark_border),
               title: CustomText(text: "My orders"),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                changeScreen(context, CartScreen());
+              },
               leading: Icon(Icons.shopping_cart),
               title: CustomText(text: "Cart"),
             ),
             ListTile(
-              onTap: () {},
-              leading: Icon(Icons.settings),
-              title: CustomText(text: "Settings"),
+              onTap: () {
+                user.signOut();
+                changeScreenReplacement(context, LoginScreen());
+              },
+              leading: Icon(Icons.exit_to_app),
+              title: CustomText(text: "Log out"),
             ),
           ],
         ),

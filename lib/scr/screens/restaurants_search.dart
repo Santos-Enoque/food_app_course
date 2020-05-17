@@ -83,13 +83,14 @@ class RestaurantsSearchScreen extends StatelessWidget {
                           await productProvider.loadProductsByRestaurant(
                               restaurantId: restaurantProvider
                                   .searchedRestaurants[index].id);
+                          app.changeLoading();
+
                           changeScreen(
                               context,
                               RestaurantScreen(
                                 restaurantModel: restaurantProvider
                                     .searchedRestaurants[index],
                               ));
-                          app.changeLoading();
                         },
                         child: RestaurantWidget(
                             restaurant:

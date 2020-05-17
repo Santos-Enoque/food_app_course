@@ -32,12 +32,21 @@ class CartItemModel {
   int get quantity => _quantity;
 
 
-  CartItemModel.fromSnapshot(DocumentSnapshot snapshot){
-    _id = snapshot.data[ID];
-    _name = snapshot.data[NAME];
-    _image = snapshot.data[IMAGE];
-    _productId = snapshot.data[PRODUCT_ID];
-    _price = snapshot.data[PRICE];
-    _quantity = snapshot.data[QUANTITY];
+  CartItemModel.fromMap(Map data){
+    _id = data[ID];
+    _name =  data[NAME];
+    _image =  data[IMAGE];
+    _productId = data[PRODUCT_ID];
+    _price = data[PRICE];
+    _quantity = data[QUANTITY];
   }
+
+  Map toMap() => {
+    ID: _id,
+    IMAGE: _image,
+    NAME: _name,
+    PRODUCT_ID: _productId,
+    QUANTITY: _quantity,
+    PRICE: _price
+  };
 }

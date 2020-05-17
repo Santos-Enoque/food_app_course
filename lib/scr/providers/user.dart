@@ -3,8 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:food_course/scr/helpers/order.dart';
 import 'package:food_course/scr/helpers/user.dart';
+import 'package:food_course/scr/models/order.dart';
+import 'package:food_course/scr/models/products.dart';
 import 'package:food_course/scr/models/user.dart';
+import 'package:uuid/uuid.dart';
 
 
 enum Status{Uninitialized, Authenticated, Authenticating, Unauthenticated}
@@ -15,12 +19,16 @@ class UserProvider with ChangeNotifier{
   Status _status = Status.Uninitialized;
   Firestore _firestore = Firestore.instance;
   UserServices _userServicse = UserServices();
+  OrderServices _orderServices = OrderServices();
   UserModel _userModel;
 
 //  getter
   UserModel get userModel => _userModel;
   Status get status => _status;
   FirebaseUser get user => _user;
+
+  // public variables
+  List<OrderModel> orders = [];
 
   final formkey = GlobalKey<FormState>();
 
@@ -83,6 +91,11 @@ class UserProvider with ChangeNotifier{
     email.text = "";
   }
 
+  Future<void> reloadUserModel()async{
+    _userModel = await _userServicse.getUserById(user.uid);
+    notifyListeners();
+  }
+
 
   Future<void> _onStateChanged(FirebaseUser firebaseUser) async{
     if(firebaseUser == null){
@@ -93,5 +106,64 @@ class UserProvider with ChangeNotifier{
       _userModel = await _userServicse.getUserById(user.uid);
     }
     notifyListeners();
+  }
+
+  Future<bool> addToCard({ProductModel product, int quantity})async{
+    print("THE PRODUC IS: ${product.toString()}");
+    print("THE qty IS: ${quantity.toString()}");
+
+    try{
+      var uuid = Uuid();
+      String cartItemId = uuid.v4();
+      List cart = _userModel.cart;
+//      bool itemExists = false;
+      Map cartItem ={
+        "id": cartItemId,
+        "name": product.name,
+        "image": product.image,
+        "productId": product.id,
+        "price": product.price,
+        "quantity": quantity
+      };
+
+//      for(Map item in cart){
+//        if(item["productId"] == cartItem["productId"]){
+////          call increment quantity
+//          itemExists = true;
+//          break;
+//        }
+//      }
+
+//      if(!itemExists){
+        print("CART ITEMS ARE: ${cart.toString()}");
+        _userServicse.addToCart(userId: _user.uid, cartItem: cartItem);
+//      }
+
+
+
+      return true;
+    }catch(e){
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+
+  }
+
+  getOrders()async{
+    orders = await _orderServices.getUserOrders(userId: _user.uid);
+    notifyListeners();
+  }
+
+  Future<bool> removeFromCart({Map cartItem})async{
+    print("THE PRODUC IS: ${cartItem.toString()}");
+
+    try{
+      _userServicse.removeFromCart(userId: _user.uid, cartItem: cartItem);
+      return true;
+    }catch(e){
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+
   }
 }

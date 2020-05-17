@@ -12,6 +12,8 @@ class ProductModel {
   static const CATEGORY = "category";
   static const FEATURED = "featured";
   static const RATES = "rates";
+  static const USER_LIKES = "userLikes";
+
 
   String _id;
   String _name;
@@ -41,6 +43,8 @@ class ProductModel {
 
   String get image => _image;
 
+
+
   double get rating => _rating;
 
   int get price => _price;
@@ -49,6 +53,8 @@ class ProductModel {
 
   int get rates => _rates;
 
+  // public variable
+  bool liked = false;
 
   ProductModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];

@@ -14,6 +14,12 @@ class ProductServices {
         return products;
       });
 
+  void likeOrDislikeProduct({String id, List<String> userLikes}){
+    _firestore.collection(collection).document(id).updateData({
+      "userLikes": userLikes
+    });
+  }
+
   Future<List<ProductModel>> getProductsByRestaurant({int id}) async =>
       _firestore
           .collection(collection)
