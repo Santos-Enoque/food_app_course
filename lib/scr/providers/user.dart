@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_course/scr/helpers/order.dart';
 import 'package:food_course/scr/helpers/user.dart';
+import 'package:food_course/scr/models/cart_item.dart';
 import 'package:food_course/scr/models/order.dart';
 import 'package:food_course/scr/models/products.dart';
 import 'package:food_course/scr/models/user.dart';
@@ -121,22 +122,17 @@ class UserProvider with ChangeNotifier{
         "id": cartItemId,
         "name": product.name,
         "image": product.image,
+        "restaurantId": product.restaurantId,
+        "totalRestaurantSale": product.price * quantity,
         "productId": product.id,
         "price": product.price,
         "quantity": quantity
       };
 
-//      for(Map item in cart){
-//        if(item["productId"] == cartItem["productId"]){
-////          call increment quantity
-//          itemExists = true;
-//          break;
-//        }
-//      }
-
+        CartItemModel item = CartItemModel.fromMap(cartItem);
 //      if(!itemExists){
         print("CART ITEMS ARE: ${cart.toString()}");
-        _userServicse.addToCart(userId: _user.uid, cartItem: cartItem);
+        _userServicse.addToCart(userId: _user.uid, cartItem: item);
 //      }
 
 
@@ -154,7 +150,7 @@ class UserProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  Future<bool> removeFromCart({Map cartItem})async{
+  Future<bool> removeFromCart({CartItemModel cartItem})async{
     print("THE PRODUC IS: ${cartItem.toString()}");
 
     try{

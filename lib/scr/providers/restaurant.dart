@@ -18,7 +18,7 @@ class RestaurantProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  loadSingleRestaurant({int retaurantId}) async{
+  loadSingleRestaurant({String retaurantId}) async{
     restaurant = await _restaurantServices.getRestaurantById(id: retaurantId);
     notifyListeners();
   }

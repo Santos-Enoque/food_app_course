@@ -100,8 +100,8 @@ class ProductWidget extends StatelessWidget {
                         GestureDetector(
                             onTap: ()async{
                               await productProvider.loadProductsByRestaurant(
-                                  restaurantId: product.restaurantId);
-                              await restaurantProvider.loadSingleRestaurant(retaurantId: product.restaurantId);
+                                  restaurantId: product.restaurantId.toString());
+                              await restaurantProvider.loadSingleRestaurant(retaurantId: product.restaurantId.toString());
                               changeScreen(context, RestaurantScreen(restaurantModel: restaurantProvider.restaurant,));
                             },
                             child: CustomText(text: product.restaurant, color: primary, weight: FontWeight.w300, size: 14,)),

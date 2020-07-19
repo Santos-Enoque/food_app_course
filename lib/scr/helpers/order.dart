@@ -1,15 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_course/scr/models/cart_item.dart';
 import 'package:food_course/scr/models/order.dart';
 
 class OrderServices{
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
 
-  void createOrder({String userId, String id,String description,String status ,List cart, int totalPrice}) {
+  void createOrder({String userId ,String id,String description,String status ,List<CartItemModel> cart, int totalPrice}) {
+   List<Map> convertedCart = [];
+   List<String> restaurantIds = [];
+
+   for(CartItemModel item in cart){
+     convertedCart.add(item.toMap());
+     restaurantIds.add(item.restaurantId);
+   }
+
+
     _firestore.collection(collection).document(id).setData({
       "userId": userId,
       "id": id,
-      "cart": cart,
+      "restaurantIds": restaurantIds,
+      "cart": convertedCart,
       "total": totalPrice,
       "createdAt": DateTime.now().millisecondsSinceEpoch,
       "description": description,

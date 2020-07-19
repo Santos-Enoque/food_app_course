@@ -12,7 +12,7 @@ class RestaurantModel {
 
 
 
-  int _id;
+  String _id;
   String _name;
   String _image;
   List<String> _userLikes;
@@ -22,7 +22,7 @@ class RestaurantModel {
   int _rates;
 
 //  getters
-  int get id => _id;
+  String get id => _id;
 
   String get name => _name;
 

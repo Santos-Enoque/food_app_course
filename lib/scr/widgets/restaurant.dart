@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_course/scr/helpers/style.dart';
 import 'package:food_course/scr/models/restaurant.dart';
+import 'package:food_course/scr/widgets/custom_text.dart';
 import 'package:food_course/scr/widgets/small_floating_button.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -17,24 +18,7 @@ class RestaurantWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top:2, left:2, right: 2, bottom: 4),
       child: Stack(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(0),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Stack(
-                  children: <Widget>[
-                    Positioned.fill(child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                          height: 120,
-                          child: Loading()),
-                    )),
-                    Center(
-                      child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: restaurant.image),
-                    )
-                  ],
-                )),
-          ),
+          _backgroundImage(restaurant.image),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -124,5 +108,39 @@ class RestaurantWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _backgroundImage(String image){
+    if(image.isEmpty || image == null){
+      return Container(
+        height: 210,
+        decoration: BoxDecoration(
+          color: grey.withOpacity(0.8),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Center(
+          child: Image.asset("images/table.png", width: 120,),
+        )
+      );
+    }else{
+     return Padding(
+        padding: const EdgeInsets.all(0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      height: 120,
+                      child: Loading()),
+                )),
+                Center(
+                  child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: restaurant.image),
+                )
+              ],
+            )),
+      );
+    }
   }
 }

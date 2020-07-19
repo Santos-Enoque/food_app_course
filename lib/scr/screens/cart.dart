@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_course/scr/helpers/order.dart';
 import 'package:food_course/scr/helpers/style.dart';
+import 'package:food_course/scr/models/cart_item.dart';
 import 'package:food_course/scr/models/products.dart';
 import 'package:food_course/scr/providers/app.dart';
 import 'package:food_course/scr/providers/user.dart';
@@ -42,8 +43,6 @@ class _CartScreenState extends State<CartScreen> {
       body: app.isLoading ? Loading() : ListView.builder(
           itemCount: user.userModel.cart.length,
           itemBuilder: (_, index) {
-            print("THE PRICE IS: ${user.userModel.cart[index]["price"]}");
-            print("THE QUANTITY IS: ${user.userModel.cart[index]["quantity"]}");
 
             return Padding(
               padding: const EdgeInsets.all(16),
@@ -66,7 +65,7 @@ class _CartScreenState extends State<CartScreen> {
                         topLeft: Radius.circular(20),
                       ),
                       child: Image.network(
-                        user.userModel.cart[index]["image"],
+                        user.userModel.cart[index].image,
                         height: 120,
                         width: 140,
                         fit: BoxFit.fill,
@@ -82,13 +81,13 @@ class _CartScreenState extends State<CartScreen> {
                           RichText(
                             text: TextSpan(children: [
                               TextSpan(
-                                  text: user.userModel.cart[index]["name"] + "\n",
+                                  text: user.userModel.cart[index].name+ "\n",
                                   style: TextStyle(
                                       color: black,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold)),
                               TextSpan(
-                                  text: "\$${user.userModel.cart[index]["price"] / 100} \n\n",
+                                  text: "\$${user.userModel.cart[index].price / 100} \n\n",
                                   style: TextStyle(
                                       color: black,
                                       fontSize: 18,
@@ -100,7 +99,7 @@ class _CartScreenState extends State<CartScreen> {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400)),
                               TextSpan(
-                                  text: user.userModel.cart[index]["quantity"].toString(),
+                                  text: user.userModel.cart[index].quantity.toString(),
                                   style: TextStyle(
                                       color: primary,
                                       fontSize: 16,
@@ -225,7 +224,7 @@ class _CartScreenState extends State<CartScreen> {
                                               totalPrice: user.userModel.totalCartPrice,
                                               cart: user.userModel.cart
                                             );
-                                            for(Map cartItem in user.userModel.cart){
+                                            for(CartItemModel cartItem in user.userModel.cart){
                                               bool value = await user.removeFromCart(cartItem: cartItem);
                                               if(value){
                                                 user.reloadUserModel();

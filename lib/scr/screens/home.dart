@@ -75,20 +75,13 @@ class _HomeState extends State<Home> {
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                changeScreen(context, Home());
+              },
               leading: Icon(Icons.home),
               title: CustomText(text: "Home"),
             ),
-//            ListTile(
-//              onTap: () {},
-//              leading: Icon(Icons.fastfood),
-//              title: CustomText(text: "Food I like"),
-//            ),
-//            ListTile(
-//              onTap: () {},
-//              leading: Icon(Icons.restaurant),
-//              title: CustomText(text: "Liked restaurants"),
-//            ),
+
             ListTile(
               onTap: () async{
                 await user.getOrders();

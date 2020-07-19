@@ -6,6 +6,7 @@ import 'package:food_course/scr/providers/restaurant.dart';
 import 'package:food_course/scr/providers/user.dart';
 import 'package:food_course/scr/screens/home.dart';
 import 'package:food_course/scr/screens/login.dart';
+import 'package:food_course/scr/screens/splash.dart';
 import 'package:food_course/scr/widgets/loading.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class ScreensController extends StatelessWidget {
     final auth = Provider.of<UserProvider>(context);
     switch (auth.status) {
       case Status.Uninitialized:
-        return Loading();
+        return Splash();
       case Status.Unauthenticated:
       case Status.Authenticating:
         return LoginScreen();
